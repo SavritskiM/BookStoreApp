@@ -1,0 +1,10 @@
+@(book: Book)
+
+@layout(book.title) {
+    <h1>@book.title</h1>
+    <p>Price: @book.price</p>
+    <p>Author: @book.author</p>
+
+    <a href="@routes.BookController.edit(book.id)">Edit</a>
+    <a href="@routes.BookController.destroy(book.id)">Delete</a>
+}
