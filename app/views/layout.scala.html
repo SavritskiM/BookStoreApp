@@ -36,6 +36,18 @@
         </nav>
 
         <div class="container-fluid">
+
+            @for(key <- Array("danger", "success", "info", "warning")) {
+                @if(flash.containsKey(key)) {
+                    <div class="alert alert-@key">
+                        @flash.get(key)
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">
+                            <i class="fas fa-times"></i>
+                        </a>
+                    </div>
+                }
+            }
+
             @content
         </div>
 

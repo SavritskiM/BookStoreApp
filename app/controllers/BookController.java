@@ -11,39 +11,6 @@ import views.html.books.*;
 import javax.inject.Inject;
 import java.util.List;
 
-/***
- * Setup debugger
- * https://www.youtube.com/watch?v=4DB2De3qv0U&list=PLYPFxrXyK0Bx9SBkNhJr1e2-NlIq4E7ED&index=14
- *
- * 12. We need to explicitly define getters and setters for future form submission (video 14)
- *
- * 21. @ 1:24 - The EBean plugin version should be 4.1.0, or check releases for other versions.
- * https://github.com/playframework/play-ebean#releases
- *
- *      Add the following to build.sbt:
- *      libraryDependencies += "com.h2database" % "h2" % "1.4.192"
- *      libraryDependencies += javaJdbc
- *
- *      Click "Import Changes" in the bottom right.
- *      Restart the SBT shell, ctrl-c, or ctrl-d. until you get to the Linux terminal or windows cmd.
- *      This should fix the issue the YouTuber experiences @ 5:15.
- *
- *     @ 5:00 different  import statement for Model ->     import io.ebean.*;
- *
- *     @ 5:15 to 7:00 IGNORE
- *
- *     If you get "io.ebean could not be found" try restarting the sbt console.
- *
- * 22. After following the video, you most likely will get a message:
- *      Unauthorized
- *      You must be authenticated to access this page.
- *
- *     To fix this, modify edit.scala.html and edit.scala.html @helper.form() to the below:
- *     @helper.form(CSRF(routes.BooksController.save())) {
- *
- *
- */
-
 public class BookController extends Controller {
 
     @Inject
@@ -78,15 +45,25 @@ public class BookController extends Controller {
     }
 
     public Result save() {
-        Form<Book> bookForm = formFactory.form(Book.class);
-        Book book = bookForm.bindFromRequest().get();
+        Form<Book> bookForm = formFactory.form(Book.class).bindFromRequest();
+        if (bookForm.hasErrors()) {
+            flash("danger", "Please correct the form below");
+            return badRequest(create.render(bookForm));
+        }
+        Book book = bookForm.get();
         book.save();
+        flash("success", "Book created");
         return redirect(routes.BookController.index());
     }
 
     public Result update() {
-        Form<Book> bookForm = formFactory.form(Book.class);
-        Book newVersion = bookForm.bindFromRequest().get();
+        Form<Book> bookForm = formFactory.form(Book.class).bindFromRequest();
+        if (bookForm.hasErrors()) {
+            flash("danger", "Please correct the form below");
+            return badRequest(edit.render(bookForm));
+        }
+
+        Book newVersion = bookForm.get();
         Book oldVersion = Book.find.byId(newVersion.id);
         if (oldVersion == null) {
             return notFound("Book not found");
@@ -95,7 +72,7 @@ public class BookController extends Controller {
         oldVersion.price = newVersion.price;
         oldVersion.author = newVersion.author;
         oldVersion.update();
-
+        flash("success", "book updated");
         return redirect(routes.BookController.index());
     }
 

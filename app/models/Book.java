@@ -2,6 +2,7 @@ package models;
 
 import io.ebean.Finder;
 import io.ebean.Model;
+import play.data.validation.Constraints;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -12,9 +13,22 @@ import java.util.Set;
 public class Book extends Model {
 
     @Id
+    @Constraints.Required
     public Integer id;
+
+    @Constraints.Required
+    @Constraints.MaxLength(255)
+    @Constraints.MinLength(5)
     public String title;
+
+    @Constraints.Required
+    @Constraints.Max(100)
+    @Constraints.Min(5)
     public Integer price;
+
+    @Constraints.Required
+    @Constraints.MaxLength(255)
+    @Constraints.MinLength(5)
     public String author;
 
     public static Finder<Integer, Book> find = new Finder<>(Book.class);
