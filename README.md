@@ -163,7 +163,7 @@ Update your `app/views/books/layout.scala.html` file to look exactly like the be
 
 You may now delete the `app/views/main.scala.java` file, since it is pretty much a copy of our `layout.scala.html` file.
 
-## [Video 25 - Update views 2](https://www.youtube.com/watch?v=LBuxYAAYXRM&index=26&list=PLYPFxrXyK0Bx9SBkNhJr1e2-NlIq4E7ED)
+## [Video 26 - Update views 2](https://www.youtube.com/watch?v=LBuxYAAYXRM&index=26&list=PLYPFxrXyK0Bx9SBkNhJr1e2-NlIq4E7ED)
 Important: We will be using [font-awesome](https://fontawesome.com/how-to-use/svg-with-js#additional-styling) for our icons. Replace all `glyphicon` with `fas`. So, instead of `class="glyphicon glyphicon-plus"`, use `class="fas fa-plus"`.
 ```
 Glyphicon:                        FontAwesome:
@@ -224,4 +224,8 @@ glyphicon glyphicon-book          fas fa-book
     }
 }
 ```
-
+## Video 27 - Form validations
+The alert close button should be:
+```html
+<a href="#" class="close" data-dismiss="alert" aria-label="close"><i class="fas fa-times"></i></a>
+```
