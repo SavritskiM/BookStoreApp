@@ -1,13 +1,16 @@
 @(bookForm: Form[Book])
 
 @import helper._
+@import views.html.partials._bookFormFields
 @layout("Create Book") {
     <h1>Create Book</h1>
     @helper.form(CSRF(routes.BookController.save())) {
-        @helper.inputText(bookForm("id"))
-        @helper.inputText(bookForm("title"))
-        @helper.inputText(bookForm("price"))
-        @helper.inputText(bookForm("author"))
-        <input type="submit" value="Create Book">
+
+        @_bookFormFields(bookForm)
+
+        <button class="btn btn-success" type="submit">
+            <i class="fas fa-plus"></i>
+            Create Book
+        </button>
     }
 }

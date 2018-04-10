@@ -4,7 +4,7 @@
 # --- !Ups
 
 create table book (
-  id                            integer auto_increment not null,
+  id                            serial not null,
   title                         varchar(255),
   price                         integer,
   author                        varchar(255),
@@ -14,5 +14,5 @@ create table book (
 
 # --- !Downs
 
-drop table if exists book;
+drop table if exists book cascade;
 

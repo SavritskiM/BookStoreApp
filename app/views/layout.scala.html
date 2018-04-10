@@ -1,0 +1,45 @@
+@(title: String)(content: Html)
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        @* Here's where we render the page title `String`. *@
+        <title>@title</title>
+        <link rel="shortcut icon" type="image/png" href="@routes.Assets.versioned("images/favicon.png")">
+        <link rel="stylesheet" type="text/css" href="@routes.Assets.versioned("stylesheets/bootstrap.css")">
+        <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/fa-svg-with-js.css")">
+        <script defer src="@routes.Assets.versioned("javascripts/fontawesome-all.js")"></script>
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-sm bg-light navbar-light">
+                <!-- Brand/logo -->
+            <a class="navbar-brand" href="@routes.HomeController.index()">BookStore App</a>
+
+                <!-- Links -->
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="@routes.BookController.index()">
+                        <i class="fas fa-book"></i>
+                        All Books
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="@routes.BookController.create()">
+                        <i class="fas fa-plus"></i>
+                        Create Book
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <div class="container-fluid">
+            @content
+        </div>
+
+        <script type='text/javascript' src='@routes.Assets.versioned("javascripts/jquery-3.3.1.js")'></script>
+        <script type='text/javascript' src='@routes.Assets.versioned("javascripts/bootstrap.js")'></script>
+    </body>
+</html>

@@ -3,7 +3,7 @@
 # ~~~~
 
 # An example controller showing a sample home page
-GET     /                           controllers.BookController.index
+GET     /                           controllers.HomeController.index
 
 # BookStoreApp
 

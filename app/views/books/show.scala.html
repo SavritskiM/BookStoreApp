@@ -5,6 +5,6 @@
     <p>Price: @book.price</p>
     <p>Author: @book.author</p>
 
-    <a href="@routes.BookController.edit(book.id)">Edit</a>
-    <a href="@routes.BookController.destroy(book.id)">Delete</a>
+    <a class="btn btn-primary" href="@routes.BookController.edit(book.id)">Edit</a>
+    <a class="btn btn-danger" href="@routes.BookController.destroy(book.id)">Delete</a>
 }
