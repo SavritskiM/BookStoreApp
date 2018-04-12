@@ -225,7 +225,7 @@ glyphicon glyphicon-book          fas fa-book
 }
 ```
 ## Video 27 - Form validations
-The alert close button should be:
+**@ 5:58** The alert close button should be:
 ```html
 <a href="#" class="close" data-dismiss="alert" aria-label="close"><i class="fas fa-times"></i></a>
 ```
