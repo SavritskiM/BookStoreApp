@@ -229,3 +229,59 @@ The alert close button should be:
 ```html
 <a href="#" class="close" data-dismiss="alert" aria-label="close"><i class="fas fa-times"></i></a>
 ```
+
+## Video 28 - Delete request
+Due to security reasons, the explanation in the video will not work fully. You can still follow along and then modify as explained below. We need to accomodate for CSRF in our `show` page's delete button and add a function to the `custom.js` file.
+
+
+### Modify show's delete button
+File `app/views/show.scala.html`. Update the delete button to look like this:
+```
+...
+    <button id="delete-book"
+            data-url=" @helper.CSRF(routes.BooksController.destroy(book.id))"
+            data-r-url="@routes.BooksController.index()"
+            class="btn btn-danger">
+        Delete
+    </button>
+...
+```
+
+### Modify custom js file
+File: `public/javascripts/custom.js`. Should be as below.
+```JavaScript
+// file: public/javascripts/custom.js
+
+$(function() {
+    $("button#delete-book").click(function () {
+        var url = $(this).data("url");
+        var rUrl = $(this).data("r-url");
+        sendDeleteRequest(url, rUrl);
+    });
+});
+
+function sendDeleteRequest(url, rUrl) {
+    $.ajax({
+        url: url,
+        method: "DELETE",
+        contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+        success: function () {
+            window.location = rUrl;
+        },
+        error: function () {
+            window.location.reload();
+        }
+    });
+}
+
+```
+
+### Add `custom.js` to layout
+**If it is not already there**
+In the `app/views/layout.scala.html` file, add the `<script ...>` line just above the `</body>` tag.
+```html
+    ...
+        <script type='text/javascript' src='@routes.Assets.versioned("javascripts/custom.js")'></script>
+    </body>
+</html>
+```
