@@ -236,7 +236,7 @@ Due to security reasons, the explanation in the video will not work fully. You c
 
 ### Modify show's delete button
 File `app/views/show.scala.html`. Update the delete button to look like this:
-```
+```html
 ...
     <button id="delete-book"
             data-url=" @helper.CSRF(routes.BooksController.destroy(book.id))"
