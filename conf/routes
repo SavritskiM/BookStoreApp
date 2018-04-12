@@ -13,8 +13,7 @@ GET     /books/:id                  controllers.BookController.show(id : Integer
 GET     /books/edit/:id             controllers.BookController.edit(id : Integer)
 POST    /books/edit                 controllers.BookController.update
 POST    /books/create               controllers.BookController.save
-GET     /books/delete/:id           controllers.BookController.destroy(id : Integer)
-
+DELETE  /books/delete/:id           controllers.BookController.destroy(id : Integer)
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
