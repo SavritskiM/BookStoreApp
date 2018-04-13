@@ -308,7 +308,8 @@ $(function() {
         var rUrl = $(this).data("r-url");
         sendDeleteRequest(url, rUrl);
     });
-
+    
+    // add this one
     $("button#edit-book").click(function () {
         var formId = $(this).data("form-id");
         var rUrl = $(this).data("r-url");
@@ -317,3 +318,28 @@ $(function() {
 });
 ```
 
+If you are having difficulties with your `BookController.java` file, make sure the `update()` function is as below.
+```java
+// file: app/controllers/BooksController.java
+
+    public Result update() {
+        Form<Book> bookForm = formFactory.form(Book.class).bindFromRequest();
+        if (bookForm.hasErrors()) {
+            flash("danger", "Please correct the form below");
+            return badRequest();
+        }
+
+        Book newVersion = bookForm.get();
+        Book oldVersion = Book.find.byId(newVersion.id);
+        if (oldVersion == null) {
+            flash("danger", "Book not found");
+            return notFound();
+        }
+        oldVersion.title = newVersion.title;
+        oldVersion.price = newVersion.price;
+        oldVersion.author = newVersion.author;
+        oldVersion.update();
+        flash("success", "book updated");
+        return ok();
+    }
+```
