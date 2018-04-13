@@ -5,7 +5,7 @@
 
 @layout("Edit book") {
     <h1>Edit Book</h1>
-    @helper.form(action = CSRF(routes.BookController.update()), 'id -> "bookUpdateForm") {
+    @helper.form(CSRF(routes.BookController.update()), 'id -> "bookUpdateForm") {
         @_bookFormFields(bookForm)
     }
 

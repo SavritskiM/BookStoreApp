@@ -60,7 +60,7 @@ public class BookController extends Controller {
         Form<Book> bookForm = formFactory.form(Book.class).bindFromRequest();
         if (bookForm.hasErrors()) {
             flash("danger", "Please correct the form below");
-            return badRequest("BLAH");
+            return badRequest();
         }
 
         Book newVersion = bookForm.get();
