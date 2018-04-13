@@ -2,12 +2,17 @@
 
 @import helper._
 @import views.html.partials._bookFormFields
+
 @layout("Edit book") {
     <h1>Edit Book</h1>
-    @helper.form(CSRF(routes.BookController.update())) {
+    @helper.form(action = CSRF(routes.BookController.update()), 'id -> "bookUpdateForm") {
         @_bookFormFields(bookForm)
-        <button class="btn btn-primary" type="submit">
-            Edit Book
-        </button>
     }
+
+    <button id="edit-book"
+            class="btn btn-primary"
+            data-form-id="bookUpdateForm"
+            data-r-url="@routes.BookController.edit(bookForm.get().id)">
+        Edit Book
+    </button>
 }

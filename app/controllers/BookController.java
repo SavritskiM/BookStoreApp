@@ -60,20 +60,21 @@ public class BookController extends Controller {
         Form<Book> bookForm = formFactory.form(Book.class).bindFromRequest();
         if (bookForm.hasErrors()) {
             flash("danger", "Please correct the form below");
-            return badRequest(edit.render(bookForm));
+            return badRequest("BLAH");
         }
 
         Book newVersion = bookForm.get();
         Book oldVersion = Book.find.byId(newVersion.id);
         if (oldVersion == null) {
-            return notFound("Book not found");
+            flash("danger", "Book not found");
+            return notFound();
         }
         oldVersion.title = newVersion.title;
         oldVersion.price = newVersion.price;
         oldVersion.author = newVersion.author;
         oldVersion.update();
         flash("success", "book updated");
-        return redirect(routes.BookController.index());
+        return ok();
     }
 
     public Result destroy(Integer id) {

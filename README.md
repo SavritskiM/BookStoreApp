@@ -285,3 +285,35 @@ In the `app/views/layout.scala.html` file, add the `<script ...>` line just abov
     </body>
 </html>
 ```
+
+
+## Video 29 - `PUT` Request
+Follow the video through. There will be errors, so check the modifications below.
+
+File: `app/views/books/edit.scala.html`. The button should be as follows.
+```html
+    <button id="edit-book"
+            class="btn btn-primary"
+            data-form-id="bookUpdateForm"
+            data-r-url="@routes.BookController.edit(bookForm.get().id)">
+        Edit Book
+    </button>
+```
+
+File: `public/javascripts/custom.js`. Add the `edit-button` click function.
+```JavaScript
+$(function() {
+    $("button#delete-book").click(function () {
+        var url = $(this).data("url");
+        var rUrl = $(this).data("r-url");
+        sendDeleteRequest(url, rUrl);
+    });
+
+    $("button#edit-book").click(function () {
+        var formId = $(this).data("form-id");
+        var rUrl = $(this).data("r-url");
+        sendPutRequest(formId, rUrl);
+    });
+});
+```
+
