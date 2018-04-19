@@ -8,6 +8,17 @@ We need to explicitly define getters and setters for the Book class or else futu
 ## [Video 14](https://www.youtube.com/watch?v=4DB2De3qv0U&list=PLYPFxrXyK0Bx9SBkNhJr1e2-NlIq4E7ED&index=14)
 This video explains how to set up the debugger.
 
+## Video 15
+After following the video, you most likely will get a message:
+```
+Unauthorized
+You must be authenticated to access this page.
+```
+To fix this, modify `create.scala.html` and `edit.scala.html` (video 22) where it has `@helper.form()` to the below:
+```
+@helper.form(CSRF(routes.BooksController.save())) {
+```
+
 ## Video 21
 **@ 1:24** - The EBean plugin version should be 4.1.0, or check [releases](https://github.com/playframework/play-ebean#releases) for other versions.
 - Add the following to `build.sbt`:
@@ -27,17 +38,6 @@ import io.ebean.*;
 **@ 5:15 to 7:00** IGNORE
 
 *Note: If you get "io.ebean could not be found" try restarting the sbt console.*
-
-## Video 22 
-After following the video, you most likely will get a message:
-```
-Unauthorized
-You must be authenticated to access this page.
-```
-To fix this, modify `create.scala.html` and `edit.scala.html` where it has `@helper.form()` to the below:
-```
-@helper.form(CSRF(routes.BooksController.save())) {
-```
 
 ## Video 23 - mySQL/PostgreSQL Database
 You can skip the video's mySQL tutorial and follow my PostgreSQL instructions. This will be the database type used if we ever deploy our app to [Heroku](https://www.heroku.com). My instructions will be based on the article *[Play-example-postgresql](http://ics-software-engineering.github.io/play-example-postgresql)*.
